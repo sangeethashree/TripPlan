@@ -1,0 +1,131 @@
+<div id="parent-component">
+  <div class="banner">
+    <div class="banner-label banner-alignment">
+      Book now to get exciting travel deals.Upto 40% on creditcard payments.
+    </div>
+    <div class="banner-label counter">Offer ends in <span *ngIf="distance > 0 else expired">
+      {{days}}d {{hours}}h {{minutes}}m {{seconds}}s
+    </span></div>
+    <ng-template #expired>
+      <span>Expired</span>
+    </ng-template>
+  </div>
+  <div id="header" class="flex-container header-layout">
+    <div><a class="navigation-label" href="#weather-channel">WEATHER</a></div>
+    <div><a class="navigation-label" href="#featured-destinations"> DESTINATIONS</a></div>
+    <div> <a class="navigation-label"  href="#get-quote">GET A QUOTE</a></div>
+  </div>
+
+<div class="body-container">
+  <div id="staticLayout1" class="flex-container wrap-xs">
+    <div><img src="../assets/images/welcome-image.svg" height="250px" width ="350px" class="img-xs"></div>
+    <div class="static-layout plan-trip-content" >
+      <div class="content1"><div>Life is short</div> <div>and the world is wide!</div></div>
+      <div class="mt10 content2">Stay at the comfort of your homes and book a trip to travel after the post pandemic era.</div>
+      <div>
+        <button class="static-btn mt10">PLAN A TRIP</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="weather-channel">
+    <div class="channel-header">
+      <div class="header-text">THE WEATHER CHANNEL</div>
+    </div>
+    <div class="channel-body">
+      <div *ngFor="let cityWeather of cityWeatherDetails" class="country-weather-container"
+        [style.background-color]="getBackgroundColor(cityWeather.city)">
+        <div class="weather-label">{{cityWeather.city}}</div>
+        <div class="weather-label"><img src="../assets/images/icon-party-sunny.svg" class="img-xs" height="30px" width="60px"></div>
+        <div class="celusius-label">{{cityWeather.temp_Celsius}}<span>&#176;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="featured-destinations">
+    <div class="destination-header">
+      Featured Destinations
+    </div>
+    <div class="destination-body">
+      <div *ngFor="let destination of featuredDestinations" class="img-container">
+        <img [src]="destination.imageUrl" height='200px' width='200px' class="img">
+        <div>{{destination.city}}</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="plan-trip">
+    <img src="../assets/images/promo-image.png" width="100%">
+    <div class="static-label">
+      <p class="content1">PLAN A TRIP</p>
+      <p class="content2">Make your vacation the most memorable one</p>
+    </div>
+  </div>
+
+  <div id="get-quote">
+    <div class="quote-header">
+      Travelling as a Group? Get a Quote
+    </div>
+    <div>
+      <form #contactForm="ngForm" class="contact-form" (ngSubmit)="onClickSubmit(contactForm)">
+        <label class="common-label-text">Your Name</label>
+        <input type="text" name="contactName" [(ngModel)]='contactName' #name="ngModel" required>
+        <p class="warning" *ngIf="!name.valid && name.dirty">First Name is required</p>
+
+        <label class="common-label-text">Contact No</label>
+        <input type="text" name="contactNo" [(ngModel)]='contactNo' #number="ngModel" required>
+        <p  class="warning" *ngIf="!number.valid && number.dirty">ContactNo is Required</p>
+        <p class="warning" *ngIf="!isContactNoValid && number.valid">Invalid ContactNo</p>
+
+        <label class="common-label-text">Email</label>
+        <input type="text" name="emailAddress" [(ngModel)]='emailAddress' #email="ngModel" required>
+        <p class="warning" *ngIf="!email.valid && email.dirty">Email is Required</p>
+        <p class="warning" *ngIf="!isEmailValid && email.valid">Invalid Email</p>
+
+        <div *ngIf="showMessage" class="success-msg">We hear you we will get back to you for planning your vaccation.</div>
+        <div class="btn-container"><button type="submit" class="static-btn submit-btn" [disabled]=contactForm.invalid>SUBMIT</button></div>
+      </form>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="footer-layout">
+      <div class="footer-header">TripZone</div>
+      <div class="footer-body">
+        <div>About</div>
+        <div>Awards</div>
+        <div>Contact Us</div>
+        <div>Feedback</div>
+      </div>
+    </div>
+    <div class="footer-layout">
+      <div class="footer-header" >MainOffices</div>
+      <div class="footer-body">
+        <div>The United States</div>
+        <div>India</div>
+        <div>Brazil</div>
+        <div>Canada </div>
+      </div>
+    </div>
+    <div class="footer-layout">
+      <div class="footer-header" >Sub Offices</div>
+      <div class="footer-body">
+      <div>Australia</div>
+      <div>England</div>
+      <div>France</div>
+      <div>Germany</div>
+      </div>
+    </div>
+    <div class="footer-layout" style="width:55%">
+      <div class="footer-header" >Disclaimer</div>
+      <div class="footer-body">
+        <div>This layout is created as part of sirius Recruitments</div>
+        <div>All the above content has no direct relation with Sirius business</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
